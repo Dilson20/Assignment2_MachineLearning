@@ -1,5 +1,3 @@
-#preparing the data
-#%%
 import os
 import numpy as np
 from sklearn.model_selection import train_test_split
@@ -40,17 +38,38 @@ X_train, X_val, y_train, y_val = train_test_split(images, labels, test_size=0.2,
 X_train = X_train / 255.0
 X_val = X_val / 255.0
 
-#import random forrest
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import cross_val_score
+#KNN import nessecary packages
+from sklearn.neighbors import NearestNeighbors
 
-#transform to 2D
-X_train_flattened = X_train.reshape(X_train.shape[0], -1)
-X_val_flattened = X_val.reshape(X_val.shape[0], -1)
+# Define the number of nearby images 
+k = 10
 
-randForrest = RandomForestClassifier(100)
+# Flatten the images
+images_flattened = images.reshape(images.shape[0], -1)
 
-randForrest.fit(X_train_flattened, y_train)
+#Train the model
+knn = NearestNeighbors(n_neighbors=k, metric='cosine')
+knn.fit(images_flattened)
 
-score = randForrest.score(X_val_flattened, y_val)
-print("Validation accuracy: {:.2f}%".format(score*100))
+# Load the input image
+input_img = Image.open(os.path.join(base_dir, r"Babi\babi_1.jpg"))
+input_img = input_img.resize(img_size)
+input_x = np.array(input_img)
+input_x_flattened = input_x.reshape(1, -1)
+
+# Find the k-nearest neighbors of the input image in the dataset
+distances, indices = knn.kneighbors(input_x_flattened)
+
+for i in range(k):
+    index = indices[0][i]
+    print(i)
+    print(len(flower_names))
+    print(index)
+    print(len(indices))
+    print(indices)
+    if index >= len(flower_names):
+        break
+    flower_name = flower_names[index] # This will result in error due to indices and different number of images in each folder. 
+    print('Nearest neighbor {}: {}'.format(i+1, flower_name))
+    neighbor_img = Image.fromarray(images[index])
+    neighbor_img.show()

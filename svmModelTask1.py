@@ -3,7 +3,7 @@
 import os
 import numpy as np
 from sklearn.model_selection import train_test_split
-from PIL import Image
+from PIL import Image #pillow-simd --> faster and can be pip installed.
 from keras.utils import to_categorical
 from keras.models import Sequential, Model
 from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Input

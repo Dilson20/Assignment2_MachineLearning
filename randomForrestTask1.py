@@ -50,7 +50,7 @@ X_val_flattened = X_val.reshape(X_val.shape[0], -1)
 
 randForrest = RandomForestClassifier(100)
 
-randForrest.fit(X_train_flattened, y_train)
+randForrest.fit(X_train_flattened, y_train) #epoch
 
 score = randForrest.score(X_val_flattened, y_val)
 print("Validation accuracy: {:.2f}%".format(score*100))

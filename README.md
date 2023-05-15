@@ -9,7 +9,7 @@
 - There might or might not unused libraries. You can delete them if you want
 
 # EDA
-- I suggest display 10 random images from one class (Lisianthus will be the clearest). The color from each image should be different and you can give some comments like the color feature might be misleading and grayscale can be better
+- I suggest adding another graph display 10 random images from one class (Lisianthus will be the clearest). The color from each image should be different and you can give some comments like the color feature might be misleading and grayscale can be better
 
 # Data preprocessing
 - The dataset i use only support Keras and Tensorflow. You can use SVM, RandomForest from Tensorflow for testing. The syntax is similar to SKlearn
